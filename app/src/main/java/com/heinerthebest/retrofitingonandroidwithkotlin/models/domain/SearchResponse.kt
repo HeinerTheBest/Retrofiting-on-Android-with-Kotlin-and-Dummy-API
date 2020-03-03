@@ -1,5 +1,7 @@
 package com.heinerthebest.retrofitingonandroidwithkotlin.models.domain
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * TODO Add class description
  *
@@ -20,33 +22,33 @@ data class User(
 )
 
 data class DummyUser(
-    val id: Long,
-    val name: String,
-    val userName: String,
-    val email: String,
-    val address: Address,
-    val phone: String,
-    val website: String,
-    val company: Company
+    @SerializedName("id") val id : Int,
+    @SerializedName("name") val name : String,
+    @SerializedName("username") val username : String,
+    @SerializedName("email") val email : String,
+    @SerializedName("address") val address : Address,
+    @SerializedName("phone") val phone : String,
+    @SerializedName("website") val website : String,
+    @SerializedName("company") val company : Company
 )
 
 data class Address(
-    val street: String,
-    val suite: String,
-    val city: String,
-    val zipCode: String,
-    val geo: Geo
+    @SerializedName("street") val street : String,
+    @SerializedName("suite") val suite : String,
+    @SerializedName("city") val city : String,
+    @SerializedName("zipcode") val zipcode : String,
+    @SerializedName("geo") val geo : Geo
 )
 
 data class Geo(
-    val lat: Double,
-    val lng: Double
+    @SerializedName("lat") val lat : Double,
+    @SerializedName("lng") val lng : Double
 )
 
 data class Company(
-    val name: String,
-    val catchPhrase: String,
-    val bs: String
+    @SerializedName("name") val name : String,
+    @SerializedName("catchPhrase") val catchPhrase : String,
+    @SerializedName("bs") val bs : String
 )
 
 data class Result(val total_count: Int, val incomplete_results: Boolean, val items: List<User>)
