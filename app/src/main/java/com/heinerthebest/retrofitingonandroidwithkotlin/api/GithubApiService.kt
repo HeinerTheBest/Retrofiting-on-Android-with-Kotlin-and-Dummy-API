@@ -1,5 +1,8 @@
 package com.heinerthebest.retrofitingonandroidwithkotlin.api
 
+import android.util.Log
+import com.heinerthebest.retrofitingonandroidwithkotlin.models.domain.DummyResult
+import com.heinerthebest.retrofitingonandroidwithkotlin.models.domain.DummyUser
 import com.heinerthebest.retrofitingonandroidwithkotlin.models.domain.Result
 import io.reactivex.Observable
 import retrofit2.Retrofit
@@ -18,8 +21,12 @@ interface GithubApiService {
 
     @GET("search/users")
     fun search(@Query("q") query: String,
-               @Query("page") page: Int,
-               @Query("per_page") perPage: Int): Observable<Result>
+               @Query("page") page: Int = 1,
+               @Query("per_page") perPage: Int = 20): Observable<Result>
+
+
+    @GET("users")
+    fun searchDummyUsers() : Observable<List<DummyUser?>>
 
     /**
      * Companion object to create the GithubApiService
@@ -32,7 +39,18 @@ interface GithubApiService {
                 .baseUrl("https://api.github.com/")
                 .build()
 
-            return retrofit.create(GithubApiService::class.java);
+            return retrofit.create(GithubApiService::class.java)
+        }
+
+
+        fun createDummy(): GithubApiService {
+            val retrofit = Retrofit.Builder()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .build()
+
+            return retrofit.create(GithubApiService::class.java)
         }
     }
 }
