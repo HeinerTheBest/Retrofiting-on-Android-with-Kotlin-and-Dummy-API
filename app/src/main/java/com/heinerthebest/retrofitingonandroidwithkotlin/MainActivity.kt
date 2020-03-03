@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val repository = SearchRepositoryProvider.provideSearchRepository()
+        val repositoryDummy = SearchRepositoryProvider.provideSearchDummyRepository()
+
 
         compositeDisposable.add(
             repository.searchUsers("Lagos", "Java")
@@ -34,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         compositeDisposable.add(
-            repository.searchDummyUsers()
+            repositoryDummy.searchDummyUsers()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ result ->
@@ -44,8 +46,6 @@ class MainActivity : AppCompatActivity() {
                     error.printStackTrace()
                 })
         )
-
-
     }
 
     override fun onDestroy() {

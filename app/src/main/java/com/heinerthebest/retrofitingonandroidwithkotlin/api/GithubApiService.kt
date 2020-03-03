@@ -1,7 +1,5 @@
 package com.heinerthebest.retrofitingonandroidwithkotlin.api
 
-import android.util.Log
-import com.heinerthebest.retrofitingonandroidwithkotlin.models.domain.DummyResult
 import com.heinerthebest.retrofitingonandroidwithkotlin.models.domain.DummyUser
 import com.heinerthebest.retrofitingonandroidwithkotlin.models.domain.Result
 import io.reactivex.Observable
@@ -26,7 +24,7 @@ interface GithubApiService {
 
 
     @GET("users")
-    fun searchDummyUsers() : Observable<List<DummyUser?>>
+    fun searchDummyUsers() : Observable<List<DummyUser>>
 
     /**
      * Companion object to create the GithubApiService
